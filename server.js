@@ -1,6 +1,6 @@
 var os = require('os');
 var static = require('node-static');
-var http = require('http');
+var https = require('https');
 var socketIO = require('socket.io');
 var fs = require('fs');
 
@@ -10,7 +10,7 @@ var options = {
 };
 
 var fileServer = new(static.Server)();
-var app = http.createServer(function (req, res) {
+var app = https.createServer(function (req, res) {
   fileServer.serve(req, res);
 }).listen(2013);
 
