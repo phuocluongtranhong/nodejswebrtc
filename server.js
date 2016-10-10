@@ -1,30 +1,20 @@
-// var os = require('os');
-// var static = require('node-static');
-// var http = require('http');
-// var socketIO = require('socket.io');
-// var fs = require('fs');
-// var options = {
-//   // key: fs.readFileSync('key.pem'),
-//   // cert: fs.readFileSync('cert.pem')
-// };
-
-// var fileServer = new(static.Server)();
-// var app = http.createServer(function (req, res) {
-//   fileServer.serve(req, res);
-// }).listen(2013);
-
-// var io = socketIO.listen(app);
-
-
+var os = require('os');
 var static = require('node-static');
-var express = require('express'),
-    app = express(),
-    server = require('http').createServer(app),
-    io = require('socket.io').listen(server);
-    
-server.listen(process.env.PORT || 3000);
+var http = require('http');
+var socketIO = require('socket.io');
+var fs = require('fs');
 
-//------
+var options = {
+  // key: fs.readFileSync('key.pem'),
+  // cert: fs.readFileSync('cert.pem')
+};
+
+var fileServer = new(static.Server)();
+var app = http.createServer(function (req, res) {
+  fileServer.serve(req, res);
+}).listen(2013);
+
+var io = socketIO.listen(app);
 io.sockets.on('connection', function (socket){
 
     // convenience function to log server messages on the client
@@ -59,10 +49,6 @@ io.sockets.on('connection', function (socket){
 			socket.emit('full', room);
 		}
 	});
-
-    socket.on('error', function (err) {
-        console.log(err);
-    });
 
     socket.on('ipaddr', function () {
         var ifaces = os.networkInterfaces();
