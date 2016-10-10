@@ -20,11 +20,9 @@ var static = require('node-static');
 var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
-
+    io = require('socket.io').listen(server);
+    
 server.listen(process.env.PORT || 3000);
-
-var io = require('socket.io').listen(app);
 
 //------
 io.sockets.on('connection', function (socket){
